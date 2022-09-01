@@ -4,6 +4,7 @@ import Todo from "../../components/Todo/Todo";
 function Todos() {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState([]);
+  const [status, setStatus] = useState("all");
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -28,12 +29,16 @@ function Todos() {
     let updateTodo = todos.map((elem) => {
       if (elem.id == id) {
         elem.isCompleted = !elem.isCompleted;
-        return elem
+        return elem;
       }
-      return elem
+      return elem;
     });
 
-    setTodos(updateTodo)
+    setTodos(updateTodo);
+  };
+
+  const completeStatus = () => {
+    setStatus("complete");
   };
   return (
     <div className="w-full h-screen bg-blue-600">
@@ -55,11 +60,18 @@ function Todos() {
           >
             Add
           </button>
+          <button
+            className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
+            onClick={completeStatus}
+          >
+            Complete
+          </button>
         </div>
       </div>
 
       <div className="w-[50%] mx-auto my-10">
         {todos.length > 0 &&
+          status === "all" &&
           todos.map((elem) => {
             return (
               <Todo
@@ -67,10 +79,26 @@ function Todos() {
                 text={elem.text}
                 isCompleted={elem.isCompleted}
                 deleteTodo={() => deleteTodo(elem.id)}
-                completeTodo={()=>completeTodo(elem.id)}
+                completeTodo={() => completeTodo(elem.id)}
               />
             );
           })}
+
+        {todos.length > 0 &&
+          status === "complete" &&
+          todos
+            .filter((elem) => elem.isCompleted)
+            .map((elem) => {
+              return (
+                <Todo
+                  key={elem.id}
+                  text={elem.text}
+                  isCompleted={elem.isCompleted}
+                  deleteTodo={() => deleteTodo(elem.id)}
+                  completeTodo={() => completeTodo(elem.id)}
+                />
+              );
+            })}
       </div>
     </div>
   );
