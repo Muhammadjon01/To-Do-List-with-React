@@ -40,6 +40,10 @@ function Todos() {
   const completeStatus = () => {
     setStatus("complete");
   };
+
+  const allStatus = ()=>{
+    setStatus("all")
+  }
   return (
     <div className="w-full h-screen bg-blue-600">
       <div className="w-[50%] mx-auto">
@@ -59,6 +63,12 @@ function Todos() {
             onClick={addTodo}
           >
             Add
+          </button>
+          <button
+            className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
+            onClick={allStatus}
+          >
+            All
           </button>
           <button
             className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
