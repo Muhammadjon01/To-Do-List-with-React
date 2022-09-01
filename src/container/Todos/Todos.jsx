@@ -86,6 +86,12 @@ function Todos() {
           >
             Hidden
           </button>
+          <button
+            className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
+            onClick={()=>setTodos([])}
+          >
+            Reset
+          </button>
         </div>
       </div>
 
