@@ -1,7 +1,4 @@
-import logo from "./logo.svg";
-import "./App.css";
 import Todos from "./container/Todos/Todos";
-import Todo from "./components/Todo/Todo";
 
 function App() {
   return (

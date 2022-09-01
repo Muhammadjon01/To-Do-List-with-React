@@ -4,7 +4,7 @@ function Todo(props) {
   const { text, deleteTodo, completeTodo, isCompleted } = props;
   return (
     <div>
-      <div className="border-2 p-4 flex flex-col">
+      <div className="border-2 p-4 flex flex-col bg-white">
         <div className="text-start">
           <p style={isCompleted ? { textDecoration: "line-through" } : {}}>
             {text}

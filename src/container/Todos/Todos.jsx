@@ -51,7 +51,7 @@ function Todos() {
   return (
     <div className="w-full h-screen bg-blue-600">
       <div className="w-[50%] mx-auto">
-        <h1 className="text-4xl font-bold py-10 text-white">To Do List</h1>
+        <h1 className="text-4xl font-bold py-10 text-center text-white">To Do List</h1>
         <div className="flex justify-between">
           <input
             className="w-[400px]"
@@ -95,7 +95,7 @@ function Todos() {
         </div>
       </div>
 
-      <div className="w-[50%] mx-auto my-10">
+      <div className="w-[50%] space-y-2 mx-auto my-10">
         {todos.length > 0 &&
           status === "all" &&
           todos.map((elem) => {
