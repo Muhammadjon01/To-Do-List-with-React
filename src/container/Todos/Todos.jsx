@@ -41,9 +41,13 @@ function Todos() {
     setStatus("complete");
   };
 
-  const allStatus = ()=>{
-    setStatus("all")
-  }
+  const allStatus = () => {
+    setStatus("all");
+  };
+
+  const hiddenStatus = () => {
+    setStatus("hidden");
+  };
   return (
     <div className="w-full h-screen bg-blue-600">
       <div className="w-[50%] mx-auto">
@@ -75,6 +79,12 @@ function Todos() {
             onClick={completeStatus}
           >
             Complete
+          </button>
+          <button
+            className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
+            onClick={hiddenStatus}
+          >
+            Hidden
           </button>
         </div>
       </div>
@@ -109,6 +119,8 @@ function Todos() {
                 />
               );
             })}
+
+        {status === "hidden" && "All tasks are hidden"}
       </div>
     </div>
   );
