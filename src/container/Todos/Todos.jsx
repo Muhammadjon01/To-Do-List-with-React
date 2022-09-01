@@ -21,7 +21,19 @@ function Todos() {
 
   const deleteTodo = (id) => {
     let filterTodos = todos.filter((elem) => elem.id !== id);
-    setTodos(filterTodos)
+    setTodos(filterTodos);
+  };
+
+  const completeTodo = (id) => {
+    let updateTodo = todos.map((elem) => {
+      if (elem.id == id) {
+        elem.isCompleted = !elem.isCompleted;
+        return elem
+      }
+      return elem
+    });
+
+    setTodos(updateTodo)
   };
   return (
     <div className="w-full h-screen bg-blue-600">
@@ -54,7 +66,8 @@ function Todos() {
                 key={elem.id}
                 text={elem.text}
                 isCompleted={elem.isCompleted}
-                deleteTodo={()=> deleteTodo(elem.id)}
+                deleteTodo={() => deleteTodo(elem.id)}
+                completeTodo={()=>completeTodo(elem.id)}
               />
             );
           })}
