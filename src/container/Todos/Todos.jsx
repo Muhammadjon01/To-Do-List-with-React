@@ -18,6 +18,11 @@ function Todos() {
     setTodos(newTodos);
     setText("");
   };
+
+  const deleteTodo = (id) => {
+    let filterTodos = todos.filter((elem) => elem.id !== id);
+    setTodos(filterTodos)
+  };
   return (
     <div className="w-full h-screen bg-blue-600">
       <div className="w-[50%] mx-auto">
@@ -49,6 +54,7 @@ function Todos() {
                 key={elem.id}
                 text={elem.text}
                 isCompleted={elem.isCompleted}
+                deleteTodo={()=> deleteTodo(elem.id)}
               />
             );
           })}
