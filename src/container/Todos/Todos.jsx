@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import Todo from "../../components/Todo/Todo";
 
 function Todos() {
   const [text, setText] = useState("");
   const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
+  const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
     const { value } = e.target;
@@ -48,19 +50,21 @@ function Todos() {
   const hiddenStatus = () => {
     setStatus("hidden");
   };
+
+  useEffect(() => {}, [search]);
   return (
     <div className="w-full h-screen bg-blue-600">
       <div className="w-[50%] mx-auto">
-        <h1 className="text-4xl font-bold py-10 text-center text-white">To Do List</h1>
+        <h1 className="text-4xl font-bold py-10 text-center text-white">
+          To Do List
+        </h1>
         <div className="flex justify-between">
           <input
-            className="w-[400px]"
+            className="w-[200px]"
             type="text"
             value={text}
             onChange={handleChange}
             placeholder="Add Your Task!"
-            name=""
-            id=""
           />
           <button
             className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
@@ -88,15 +92,23 @@ function Todos() {
           </button>
           <button
             className="text-white border px-4 py-2 bg-violet-500 hover:bg-violet-600"
-            onClick={()=>setTodos([])}
+            onClick={() => setTodos([])}
           >
             Reset
           </button>
+          <input
+            className="w-[200px]"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search"
+            name="search"
+          />
         </div>
       </div>
 
       <div className="w-[50%] space-y-2 mx-auto my-10">
-        {todos.length > 0 &&
+        {search === "" &&
+          todos.length > 0 &&
           status === "all" &&
           todos.map((elem) => {
             return (
@@ -114,6 +126,24 @@ function Todos() {
           status === "complete" &&
           todos
             .filter((elem) => elem.isCompleted)
+            .map((elem) => {
+              return (
+                <Todo
+                  key={elem.id}
+                  text={elem.text}
+                  isCompleted={elem.isCompleted}
+                  deleteTodo={() => deleteTodo(elem.id)}
+                  completeTodo={() => completeTodo(elem.id)}
+                />
+              );
+            })}
+
+        {search.length > 0 &&
+          todos.length > 0 &&
+          todos
+            .filter((elem) =>
+              elem.text.toLowerCase().includes(search.toLowerCase())
+            )
             .map((elem) => {
               return (
                 <Todo
